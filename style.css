@@ -1,0 +1,34 @@
+:root {
+  --small-padding: 4px;
+  --medium-padding: 8px;
+  --big-padding: 12px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  margin: unset;
+  margin-bottom: var(--medium-padding);
+}
+
+.fish-container {
+  display: flex;
+  width: 100%;
+  gap: var(--medium-padding);
+}
+
+.fish-container > * {
+  flex-grow: 1;
+}
+
+.fish-block {
+  padding: var(--medium-padding);
+}
+
+.fish-block img {
+  width: 500px;
+  height: 500px;
+}
