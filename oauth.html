@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-signin-client_id"
+        content="114861086434-fa77grumad4mhi5epcmm26pcn1qcvas0.apps.googleusercontent.com" />
+    <title>Fishing World - SignIn</title>
+</head>
+
+<body>
+    <button class="g-signin2" onclick="oauthSignIn()">Sign in</button>
+    <script>
+        /*
+   * Create form to request access token from Google's OAuth 2.0 server.
+   */
+        const CLIENT_ID = "114861086434-fa77grumad4mhi5epcmm26pcn1qcvas0.apps.googleusercontent.com"
+        const REDIRECT_URI = "https://pedcoelho.github.io/fish-bowl"
+
+        function oauthSignIn() {
+            // Google's OAuth 2.0 endpoint for requesting an access token
+            var oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+            // Create <form> element to submit parameters to OAuth 2.0 endpoint.
+            var form = document.createElement('form');
+            form.setAttribute('method', 'GET'); // Send as a GET request.
+            form.setAttribute('action', oauth2Endpoint);
+
+            // Parameters to pass to OAuth 2.0 endpoint.
+            var params = {
+                'client_id': CLIENT_ID,
+                'redirect_uri': REDIRECT_URI,
+                'response_type': 'token',
+                'state': 'pass-through value'
+            };
+
+            // Add form parameters as hidden input values.
+            for (var p in params) {
+                var input = document.createElement('input');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', p);
+                input.setAttribute('value', params[p]);
+                form.appendChild(input);
+            }
+
+            // Add form to page and submit it to open the OAuth 2.0 endpoint.
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

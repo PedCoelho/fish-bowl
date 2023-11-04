@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-signin-client_id"
+        content="114861086434-fa77grumad4mhi5epcmm26pcn1qcvas0.apps.googleusercontent.com">
     <link rel="stylesheet" href="style.css">
     <title>Fishing World</title>
 </head>
-<body>
+
+<body onload='updateBody(this)'>
     <div class="fish-container">
         <div class="fish-block fish-image">
             <img src="" alt="fish-image">
@@ -16,5 +20,35 @@
             <p>fish description</p>
         </div>
     </div>
+    <a href="#" onclick="signOut();">Sign out</a>
+    <script>
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+    </script>
+    <script>
+        function updateBody(window) {
+            const game = window.game
+            console.log(`iframe game`, window)
+            if (game && game.getMyPlayer().inventory.items) {
+                const playerItems = Object.keys(game.getMyPlayer().inventory.items)
+                const itemsMap = playerItems.map(id => game.spaceItems[id])
+
+                const fish = itemsMap[Math.floor(Math.random() * itemsMap.length)]
+
+                const title = document.querySelector('.fish-block h1')
+                title.textContent = fish.name
+                const description = document.querySelector('.fish-block h1')
+                description.textContent = fish.description
+                const image = document.querySelector('.fish-image img')
+                image.src = fish.previewUrl
+            }
+        }
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </body>
+
 </html>
